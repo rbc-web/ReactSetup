@@ -1,3 +1,14 @@
-node_modules
-node_modules
-node_modules
+#should be files created by mac
+/**/.DS_Store
+
+/**/node_modules
+
+/**/npm-debug.*
+#some examples are temp word documents
+/**/~$*
+
+#don't commit secrets
+/**/.env
+
+#For now going to commit build, since its only two files.
+#/build/**
