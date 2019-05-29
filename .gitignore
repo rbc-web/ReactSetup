@@ -10,5 +10,7 @@
 #don't commit secrets
 /**/.env
 
+/**/.vscode
+
 #For now going to commit build, since its only two files.
 #/build/**
