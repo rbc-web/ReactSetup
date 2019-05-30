@@ -4,7 +4,7 @@ import css from './CSS/App.css';
 
 function App(props){
     return (
-        <h1>{'Hello World'}{mar}</h1>
+        <h1>{'Hello World'}</h1>
         
     );
 }

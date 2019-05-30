@@ -12,5 +12,5 @@
 
 /**/.vscode
 
-#For now going to commit build, since its only two files.
-#/build/**
+#Ignore build Files
+/build/**

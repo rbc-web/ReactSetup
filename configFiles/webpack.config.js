@@ -2,11 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin  = require('clean-webpack-plugin');
 
-require('dotenv-safe').config({
-  //Needed to hardcode paths since environemt variables are not available yet.
-  path: path.resolve('/Users/Rafael/projects/ReactExamples/portfolio', '.env'),
-  example: path.resolve('/Users/Rafael/projects/ReactExamples/portfolio', '.env.example')
-});
+require('dotenv-safe').config(); //should look for .env.example and compare with .env
 
 const Dotenv = require('dotenv-webpack'); //provide env variables in front-end.
 
