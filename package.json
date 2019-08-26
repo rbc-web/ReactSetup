@@ -22,7 +22,6 @@
     "clean-webpack-plugin": "^2.0.2",
     "css-loader": "^2.1.1",
     "dotenv-safe": "^6.1.0",
-    "dotenv-webpack": "^1.7.0",
     "mini-css-extract-plugin": "^0.6.0",
     "webpack": "^4.31.0",
     "webpack-cli": "^3.3.2"
