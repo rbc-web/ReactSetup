@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin  = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 require('dotenv-safe').config(); //should look for .env.example and compare with .env
 const ENV = require('../constants/environment.js');
@@ -36,6 +37,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "./css/[name].css",
     }),
+
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.resolve(process.env.ROOT_DIRNAME, 'index.html'),
+    }),
+
   ],
 
   module: {
@@ -60,6 +67,7 @@ module.exports = {
                 ],
               },
             },
+
           ],
         },
         {
@@ -89,6 +97,10 @@ module.exports = {
               },
             }
           ]
+        },
+        {
+          test: /\.html$/,
+          loader: 'html-loader',
         },
       ]
   },
