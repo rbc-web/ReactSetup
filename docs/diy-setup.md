@@ -1,63 +1,57 @@
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+# DIY Setup
+These are the steps I took to form the basis of this setup.
 
-- [Basic React Setup](#basic-react-setup)
+<!-- TOC START min:2 max:6 link:true asterisk:false update:true -->
+- [Assumptions](#assumptions)
 - [Build Pipeline Overview](#build-pipeline-overview)
 	- [Package Manager](#package-manager)
 	- [Bundler](#bundler)
 	- [Compiler](#compiler)
-- [DIY Setup](#diy-setup)
-	- [Assumptions](#assumptions)
-	- [Create Project Folder](#create-project-folder)
-	- [Install Packages](#install-packages)
-		- [React Packages](#react-packages)
-		- [webpack Packages](#webpack-packages)
-			- [Why webpack-cli?](#why-webpack-cli)
-		- [Babel Packages](#babel-packages)
-			- [Why @babel/core?](#why-babelcore)
-			- [Why babel-loader?](#why-babel-loader)
-			- [Why core-js@3?](#why-core-js3)
-			- [Why @babel/preset-env?](#why-babelpreset-env)
-			- [Why @babel/preset-react?](#why-babelpreset-react)
-	- [webpack and Babel Configuration](#webpack-and-babel-configuration)
-		- [webpack Config File](#webpack-config-file)
-			- [Does order matter when specifying presets?](#does-order-matter-when-specifying-presets)
-			- [Where can I find a list of option for babel-loader?](#where-can-i-find-a-list-of-option-for-babel-loader)
-			- [Where can I find a list of options for preset-env?](#where-can-i-find-a-list-of-options-for-preset-env)
-			- [What does '> 0.2%, last 2 versions, Firefox ESR' mean?](#what-does-02-last-2-versions-firefox-esr-mean)
-			- [What does 'useBuiltIns': 'usage' do?](#what-does-usebuiltins-usage-do)
-			- [What does corejs option do?](#what-does-corejs-option-do)
-			- [Do we have to import core-js polyfill somewhere?](#do-we-have-to-import-core-js-polyfill-somewhere)
-		- [Alternative Babel Configuration](#alternative-babel-configuration)
-	- [Using React](#using-react)
+- [Create Project Folder](#create-project-folder)
+- [Install Packages](#install-packages)
+	- [React Packages](#react-packages)
+	- [webpack Packages](#webpack-packages)
+		- [Why webpack-cli?](#why-webpack-cli)
+	- [Babel Packages](#babel-packages)
+		- [Why @babel/core?](#why-babelcore)
+		- [Why babel-loader?](#why-babel-loader)
+		- [Why core-js@3?](#why-core-js3)
+		- [Why @babel/preset-env?](#why-babelpreset-env)
+		- [Why @babel/preset-react?](#why-babelpreset-react)
+- [webpack and Babel Configuration](#webpack-and-babel-configuration)
+	- [webpack Config File](#webpack-config-file)
+		- [Does order matter when specifying presets?](#does-order-matter-when-specifying-presets)
+		- [Where can I find a list of option for babel-loader?](#where-can-i-find-a-list-of-option-for-babel-loader)
+		- [Where can I find a list of options for preset-env?](#where-can-i-find-a-list-of-options-for-preset-env)
+		- [What does '> 0.2%, last 2 versions, Firefox ESR' mean?](#what-does--02-last-2-versions-firefox-esr-mean)
+		- [What does 'useBuiltIns': 'usage' do?](#what-does-usebuiltins-usage-do)
+		- [What does corejs option do?](#what-does-corejs-option-do)
+		- [Do we have to import core-js polyfill somewhere?](#do-we-have-to-import-core-js-polyfill-somewhere)
+	- [Alternative Babel Configuration](#alternative-babel-configuration)
+- [Using React](#using-react)
+<!-- TOC END -->
 
-<!-- /TOC -->
-
-# Basic React Setup
-My Setup for a React Application.
-
-# Build Pipeline Overview
-## Package Manager
-npm
-## Bundler
-[webpack](https://webpack.js.org/)
-
-webpack allow us to use require and import modules.
-
-## Compiler
-[Babel](https://babeljs.io/)
-
-Compiles (JS6+) to Earlier versions.
-
-Let us use JSX (E.g \<Tag\>\<\/Tag\>) in our JS Code.
-
-# DIY Setup
-These are the steps I took to form the basis of this setup.
 
 
 ## Assumptions
 * Basic understanding of webpack.
 * Basic understanding of npm.
 * Basic understanding of React.
+
+## Build Pipeline Overview
+### Package Manager
+npm
+### Bundler
+[webpack](https://webpack.js.org/)
+
+webpack allow us to use require and import modules.
+
+### Compiler
+[Babel](https://babeljs.io/)
+
+Compiles (JS6+) to Earlier versions.
+
+Let us use JSX (E.g \<Tag\>\<\/Tag\>) in our JS Code.
 
 
 ## Create Project Folder

@@ -1,31 +1,36 @@
 {
-  "name": "portfolio",
-  "version": "1.0.0",
-  "description": "portfolio",
-  "main": "index.js",
+  "name": "basic-react-setup",
+  "version": "0.2.0",
+  "description": "a basic react setup",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "buildFront": "webpack --config ./configFiles/webpack.config.js"
   },
-  "author": "Rafael B. Cordova",
-  "license": "ISC",
+  "author": {
+    "name": "Rafael Cordova",
+    "url": "https://github.com/rbc-web"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/rbc-web/basic-react-setup",
+  "bugs": {
+    "url": "https://github.com/rbc-web/basic-react-setup/issues"
+  },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "core-js": "^3.2.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^2.0.2",
-    "css-loader": "^2.1.1",
-    "dotenv-safe": "^6.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "dotenv-safe": "^8.1.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.6.0",
-    "webpack": "^4.31.0",
-    "webpack-cli": "^3.3.2"
+    "mini-css-extract-plugin": "^0.8.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8"
   }
 }
