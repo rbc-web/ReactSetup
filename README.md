@@ -135,7 +135,7 @@ At this point, you should have a workable React Setup.
 ## Documentation
 [FAQs](./docs/faq.md)
 
-[Do it yourself Setup](./diy-setup.md)
+[Do it yourself Setup](./docs/diy-setup.md)
 
 
 ## Issues and Response
