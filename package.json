@@ -1,6 +1,6 @@
 {
   "name": "basic-react-setup",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "a basic react setup",
   "scripts": {
     "buildFront": "webpack --config ./configFiles/webpack.config.js"
