@@ -15,7 +15,8 @@ These are the steps I took to form the basis of this setup.
 	- [Babel Packages](#babel-packages)
 		- [Why @babel/core?](#why-babelcore)
 		- [Why babel-loader?](#why-babel-loader)
-		- [Why core-js@3?](#why-core-js3)
+		- [Why core-js@3 and regenerator-runtime?](#why-core-js3-and-regenerator-runtime)
+		- [How about using @babel/polyfill for polyfills?](#how-about-using-babelpolyfill-for-polyfills)
 		- [Why @babel/preset-env?](#why-babelpreset-env)
 		- [Why @babel/preset-react?](#why-babelpreset-react)
 - [webpack and Babel Configuration](#webpack-and-babel-configuration)
@@ -26,7 +27,7 @@ These are the steps I took to form the basis of this setup.
 		- [What does '> 0.2%, last 2 versions, Firefox ESR' mean?](#what-does--02-last-2-versions-firefox-esr-mean)
 		- [What does 'useBuiltIns': 'usage' do?](#what-does-usebuiltins-usage-do)
 		- [What does corejs option do?](#what-does-corejs-option-do)
-		- [Do we have to import core-js polyfill somewhere?](#do-we-have-to-import-core-js-polyfill-somewhere)
+		- [Do we have to import core-js and regenerator-runtime polyfills somewhere?](#do-we-have-to-import-core-js-and-regenerator-runtime-polyfills-somewhere)
 	- [Alternative Babel Configuration](#alternative-babel-configuration)
 - [Using React](#using-react)
 <!-- TOC END -->
@@ -34,22 +35,25 @@ These are the steps I took to form the basis of this setup.
 
 
 ## Assumptions
-* Basic understanding of webpack.
-* Basic understanding of npm.
-* Basic understanding of React.
+* Some understanding of webpack.
+* Some understanding of npm.
+* Some understanding of React.
 
 ## Build Pipeline Overview
 ### Package Manager
 npm
+
 ### Bundler
 [webpack](https://webpack.js.org/)
 
-webpack allow us to use require and import modules.
+Aside bundling, webpack provides many tools that help manage your project.
+
+Some use cases include importing css files into your js files through a loader, or extracting and bundling them into a single file while obfuscating the file through a plugin.
 
 ### Compiler
 [Babel](https://babeljs.io/)
 
-Compiles (JS6+) to Earlier versions.
+Can compiles (JS6+) to Earlier versions.
 
 Let us use JSX (E.g \<Tag\>\<\/Tag\>) in our JS Code.
 
@@ -63,17 +67,17 @@ $ npm init
 
 `$` indicates terminal command.
 
-`npm init` will ask a series of questions, most can be left wit default. But remember the name entered for the main entry point.
+`npm init` will ask a series of questions, most can be left with their default value. But remember the name entered for the main entry point.
 ## Install Packages
 ### React Packages
 ```Shell Session
-$ npm install react
-$ npm install react-dom
+$ npm install --save react
+$ npm install --save react-dom
 ```
 ### webpack Packages
 ```Shell Session
-$ npm install webpack --save-dev
-$ npm install webpack-cli --save-dev
+$ npm install --save-dev webpack
+$ npm install --save-dev webpack-cli
 ```
 #### Why webpack-cli?
 Think webpack-cli (webpack client) as the interface provided in terminal to interact with webpack. Basically it allows us to use webpack commands in terminal.
@@ -82,31 +86,43 @@ Think webpack-cli (webpack client) as the interface provided in terminal to inte
 ```Shell Session
 $ npm install --save-dev @babel/core
 $ npm install --save-dev babel-loader
-$ npm install core-js@3
+$ npm install --save core-js@3
+$ npm install --save regenerator-runtime
 $ npm install --save-dev @babel/preset-env
 $ npm install --save-dev @babel/preset-react
 ```
+
 #### Why @babel/core?
-Does the actual translation.
+Is the transpiler/compiler.
 
 #### Why babel-loader?
 Is a webpack loader, allows us to interact with babel in our webpack config file.
 
-#### Why core-js@3?
-core-js provides pollyfills for JS features, like Promises.
+#### Why core-js@3 and regenerator-runtime?
+core-js and regenerator-runtime both provides pollyfills. core-js provides polyfills for features like promises or newer ECMAScript features, while regenerator-runtime provide polyfills for generators, such as async functions and by extension allows the usage of await.
 
-As for version 3 (@3), its the latest version but you can install version 2 if you like.
+As for why core-js version 3 (@3), its the latest version but you can install version 2 if you like.
 
 ```Shell Session
-$ npm install core-js@2
+$ npm install --save core-js@2
 ```
-Currently `npm install core-js` defaults to version 3.
+Currently `npm install --save core-js` defaults to version 3.
 
-Note: Some polyfills may not be provide for example [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+These two packages are closely related to @babel/preset-env's useBuiltIns option, [more info on option](https://babeljs.io/docs/en/babel-preset-env#usebuiltins).
 
-[usage of core-js polyfill in webpack](https://babeljs.io/docs/en/babel-polyfill#usage-in-node-browserify-webpack)
+**Save package as a dependency, not dev-dependency.**
 
-[More Info](https://babeljs.io/docs/en/babel-polyfill)
+[Generators info mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator)
+
+**Note: Some polyfills may not be provide, for example [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)**
+
+#### How about using @babel/polyfill for polyfills?
+>As of Babel 7.4.0, [@babel/polyfill] has been deprecated in favor of directly including core-js/stable (to polyfill ECMAScript features) and regenerator-runtime/runtime (needed to use transpiled generator functions):
+>```JavaScript
+>import "core-js/stable";
+>import "regenerator-runtime/runtime";
+>```
+>[Source](https://babeljs.io/docs/en/babel-polyfill)
 
 #### Why @babel/preset-env?
 We can think of this as a predefined configuration for our compiler(babel). It defines which JavaScript features are available, like import/export. Allow us to use the latest JS features.
@@ -177,7 +193,7 @@ Need to install to allow syntax used in react, such as JSX.
   "buildFront": "webpack --config ./webpack.config.js"
 },
 ```
-You don't have to use `"BuildFront"` as the name, and can change it to your choice.
+You can change the name of the script but be consistent afterwards.
 
 1. Run the command
   ```Shell Session
@@ -214,10 +230,12 @@ This option should only have effect when using `useBuiltIns` option.
 
 [More info](https://babeljs.io/docs/en/babel-preset-env#corejs)
 
-#### Do we have to import core-js polyfill somewhere?
-If using `'useBuiltIns': 'usage'`, no. The importation should automatically be done for us when using this option.
+#### Do we have to import core-js and regenerator-runtime polyfills somewhere?
+If using `'useBuiltIns': 'usage'`, no. The importation should automatically be done.
 
-But if using other options, we might need to import core-js or list it as an entry point in webpack.
+But if using other options, directly importing core-js and regenerator-runtime or listing them as entry points in webpack may be needed.
+
+The below quote references @babel/polyfill as the package with polyfill, but the usage of @babel/polfill has been depreciated in favor of using core-js, and regenerator-runtime.
 
 >When used alongside @babel/preset-env,
 >
@@ -228,6 +246,8 @@ But if using other options, we might need to import core-js or list it as an ent
 >If useBuiltIns key is not specified or it is explicitly set with useBuiltIns: false in your .babelrc, add @babel/polyfill directly to the entry array in your webpack.config.js.
 >
 >[More Info](https://babeljs.io/docs/en/babel-polyfill#usage-in-node-browserify-webpack)
+
+[Docs for useBuiltIns option](https://babeljs.io/docs/en/babel-preset-env#usebuiltins)
 
 ### Alternative Babel Configuration
 you can use a .babelrc file instead of placing it in babel-loader.
@@ -250,7 +270,7 @@ you can use a .babelrc file instead of placing it in babel-loader.
   );
 
   ```
-1. Create a index.html file.
+1. Create a index.html file, in the same level as your app.js file, not the bundled file.
 1. Insert the following into index.html.
   ```HTML
   <!DOCTYPE html>
